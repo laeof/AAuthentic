@@ -1,4 +1,6 @@
-﻿namespace AAuthentic.Application;
+﻿using AAuthentic.Application.Interfaces;
+
+namespace AAuthentic.Application.Common.Result;
 
 public class Result<T> : IResult<T>
 {

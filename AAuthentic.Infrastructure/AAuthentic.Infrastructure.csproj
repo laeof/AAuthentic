@@ -13,8 +13,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Npgsql.EntityFramework" Version="2.2.7" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AAuthentic.Domain\AAuthentic.Domain.csproj" />
+    <ProjectReference Include="..\AAuthentic.Application\AAuthentic.Application.csproj" />
   </ItemGroup>
 
 </Project>

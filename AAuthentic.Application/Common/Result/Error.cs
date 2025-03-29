@@ -1,4 +1,4 @@
-namespace AAuthentic.Application;
+namespace AAuthentic.Application.Common.Result;
 
 public sealed record Error(string Code, string Description)
 {

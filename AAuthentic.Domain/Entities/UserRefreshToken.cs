@@ -1,6 +1,6 @@
 ﻿namespace AAuthentic.Domain.Entities
 {
-    public class RefreshToken
+    public class UserRefreshToken
     {
 
     }

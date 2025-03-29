@@ -1,4 +1,4 @@
-namespace AAuthentic.Application;
+namespace AAuthentic.Application.UseCases;
 
 public class CreateUserUseCase {
     
