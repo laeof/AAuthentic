@@ -1,6 +1,5 @@
 ﻿using AAuthentic.Application.Users;
 using AAuthentic.Application.Validation;
-using AAuthentic.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AAuthentic.API.Controllers;
@@ -9,21 +8,20 @@ namespace AAuthentic.API.Controllers;
 [ApiController]
 public class AuthController : ControllerBase
 {
-    private readonly IUserService userService;
     private readonly IValidationService validationService;
-    public AuthController(IUserService userService,
+    public AuthController(
         IValidationService validationService)
     {
         this.userService = userService;
         this.validationService = validationService;
     }
 
-    public async Task<IActionResult> Register()
+    public async Task<IActionResult> Register(RegisterDto dto)
     {
-        return Ok();
+        
     }
 
-    public async Task<IActionResult> Login()
+    public async Task<IActionResult> Login(LoginDto dto)
     {
         return Ok();
     }
