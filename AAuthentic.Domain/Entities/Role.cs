@@ -1,6 +1,6 @@
 ﻿namespace AAuthentic.Domain.Entities;
 
-public class Role: EntityBase
+public class Role : EntityBase
 {
-
+    public string RoleName { get; set; } = string.Empty;
 }
