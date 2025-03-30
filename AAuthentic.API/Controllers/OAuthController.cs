@@ -3,20 +3,20 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AAuthentic.API.Controllers;
 
-[Route("controller")]
+[Route("[controller]")]
 [ApiController]
 public class OAuthController : ControllerBase
 {
-    [Authorize]
-    public async Task<IActionResult> Auth()
-    {
-        return Ok();
-    }
+    // [Authorize]
+    // public async Task<IActionResult> Auth()
+    // {
+    //     return Ok();
+    // }
 
-    [HttpPost("token")]
-    [Authorize]
-    public async Task<IActionResult> ExchangeCodeOnToken()
-    {
-        return Ok();
-    }
+    // [HttpPost("token")]
+    // [Authorize]
+    // public async Task<IActionResult> ExchangeCodeOnToken()
+    // {
+    //     return Ok();
+    // }
 }

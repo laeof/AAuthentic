@@ -1,24 +1,66 @@
 ﻿using AAuthentic.API.DTOs;
 using AAuthentic.API.Requests;
+using AAuthentic.Application.UseCases;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AAuthentic.API.Controllers;
 
-[Route("controller")]
+[Route("[controller]")]
 [ApiController]
 public class AuthController : ControllerBase
 {
-    public AuthController()
+    private readonly AuthenticateUserUseCase authenticateUserUseCase;
+    private readonly RegisterUserUseCase registerUserUseCase;
+    private readonly RefreshTokenUseCase refreshTokenUseCase;
+    public AuthController(AuthenticateUserUseCase authenticateUserUseCase,
+        RefreshTokenUseCase refreshTokenUseCase,
+        RegisterUserUseCase registerUserUseCase)
     {
+        this.authenticateUserUseCase = authenticateUserUseCase;
+        this.refreshTokenUseCase = refreshTokenUseCase;
+        this.registerUserUseCase = registerUserUseCase;
     }
 
+    [HttpPost("signup")]
     public async Task<IActionResult> Register(RegisterRequest request)
     {
-        return Ok();
+        var userResult = await registerUserUseCase.ExecuteAsync(
+            new()
+            {
+                Email = request.Email,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Password = request.Password,
+                Phone = request.PhoneNumber,
+                UserName = request.UserName
+            });
+
+        if (userResult.IsFailure) return Unauthorized(userResult.Error);
+
+        var tokensResult = await authenticateUserUseCase.ExecuteAsync(request.Email, request.Password);
+
+        if (tokensResult.IsFailure) return Unauthorized(new { tokensResult.Error });
+
+        return Ok(tokensResult.Value);
     }
 
+    [HttpPost("signin")]
     public async Task<IActionResult> Login(LoginRequest request)
     {
-        return Ok();
+        var tokensResult = await authenticateUserUseCase.ExecuteAsync(request.Email, request.Password);
+
+        if (tokensResult.IsFailure) return Unauthorized(new { tokensResult.Error });
+
+        return Ok(tokensResult.Value);
+    }
+
+    [HttpPost("refresh")]
+    public async Task<IActionResult> Refresh(RefreshTokenRequest request)
+    {
+        var tokensResult = await refreshTokenUseCase.ExecuteAsync(request.RefreshToken);
+
+        if (tokensResult.IsFailure) return Unauthorized(new { tokensResult.Error });
+
+        return Ok(tokensResult.Value);
     }
 }

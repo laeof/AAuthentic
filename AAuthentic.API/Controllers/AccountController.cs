@@ -2,7 +2,7 @@
 
 namespace AAuthentic.API.Controllers;
 
-[Route("controller")]
+[Route("[controller]")]
 [ApiController]
 public class AccountController : ControllerBase
 {

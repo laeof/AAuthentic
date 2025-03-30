@@ -1,8 +1,7 @@
-using System.Reflection.Metadata.Ecma335;
 using AAuthentic.Application.Common.Result;
 using AAuthentic.Application.DTOs;
 using AAuthentic.Application.Interfaces;
-using AAuthentic.Domain.Entities;
+using AAuthentic.Application.Interfaces.Service;
 
 namespace AAuthentic.Application.UseCases;
 
@@ -36,12 +35,10 @@ public class AuthenticateUserUseCase
 
         if (addRefreshResult.IsFailure) return Result<ITokens>.Faillure(addRefreshResult.Error);
 
-        IResult<ITokens> result = Result<ITokens>.Success(new Tokens
+        return Result<ITokens>.Success(new Tokens
         {
             AccessToken = accessTokenResult.Value,
             RefreshToken = refreshTokenResult.Value
         });
-
-        return result;
     }
 }

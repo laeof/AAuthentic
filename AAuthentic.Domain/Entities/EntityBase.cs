@@ -3,7 +3,7 @@
 public abstract class EntityBase
 {
     public Guid Id { get; init; }
-    public string CreatedDateUnix { get; init; } = string.Empty;
+    public string CreatedDateUnix { get; set; } = string.Empty;
     public string UpdatedDateUnix { get; set; } = string.Empty;
     public EntityBase()
     {
